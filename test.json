@@ -1,7 +1,6 @@
-"potato"
+"potato:"
 "  - alphabet"
 "  - soup"
-"    - cheese"
-    }
+"  - cheese"
   }
-"goats"
+"goats: fred"

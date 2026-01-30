@@ -8,8 +8,13 @@ def main():
         for line in lines:
             line = line.strip("\n")
             print(line)
+
+            # Categorize line
             indent = nesting(line)
-            print(indent)
+            is_list_item = line.strip().startswith("-")
+            indents_next = line.endswith(":")
+            print(indent, is_list_item, indents_next)
+            
             # Add closing braces when the indent decreases
             while indent < current_indent:
                 outfile.write(f'{" " * current_indent * SPACES_PER_TAB}}}\n')
@@ -25,6 +30,7 @@ def nesting(line):
         if c == " ":
             counter += 1
     return counter // SPACES_PER_TAB
+
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
-potato
+potato:
   - alphabet
   - soup
-    - cheese
-goats
+  - cheese
+goats: fred
