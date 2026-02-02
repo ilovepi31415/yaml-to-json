@@ -44,7 +44,8 @@ def main():
                 message = '  "' + key.strip() + '":"' + value.strip() + '"'
             else:
                 message = '  "' + line.text.strip(":") + '"'
-            
+            value = None
+
             # Check for special line cases
             if line.indents_next:
                 message += ":"
@@ -59,6 +60,7 @@ def main():
             message += "\n"
 
             # Write line of text to outfile
+            print(message)
             outfile.write(message)
 
             # Add brace or bracket after final item
@@ -69,7 +71,7 @@ def main():
                     outfile.write("}\n")
 
             current_indent = indent
-        outfile.write("}")
+        outfile.write("}\n")
         outfile.close()
 
 if __name__ == "__main__":

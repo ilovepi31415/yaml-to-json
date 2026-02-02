@@ -1,14 +1,6 @@
-potato:
-  - alphabet
-  - soup
-  - cheese
-goats:
-  a: alphabet
-  b: soup
-  c: cheese
-alphabet: potato
-one:
-  - one
-  - two
-  - three
-eight:two
+grocery list:
+  tomato: one
+  potato:
+    red: three
+    brown: four
+  cheese: zero

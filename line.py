@@ -15,6 +15,8 @@ class Line():
         for c in self.text:
             if c == " ":
                 counter += 1
+            else:
+                break
         return (counter // SPACES_PER_TAB) + BONUS_INDENTS
     
     def parse_text(self):
