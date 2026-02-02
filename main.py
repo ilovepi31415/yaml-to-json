@@ -38,15 +38,24 @@ def main():
 
             # Add line to file
             if value:
-                message = '"' + key.strip() + '":"' + value.strip() + '"'
+                message = '  "' + key.strip() + '":"' + value.strip() + '"'
             else:
-                message = '"' + line.text + '"'
+                message = '  "' + line.text.strip(":") + '"'
+            
+            # Check for special line cases
             if line.indents_next:
+                message += ":"
                 if nextline.is_list_item:
                     message += "["
                 else:
                     message += "{"
+
+            # Check for commas
+            if line.indent == nextline.indent and nextline.text:
+                message += ","
+
             message += "\n"
+
             outfile.write(message)
             current_indent = indent
         outfile.write("}")

@@ -1,8 +1,11 @@
 {
-"potato:"[
-"  - alphabet",
-"  - soup",
-"  - cheese"
-  ],
-"goats":"fred"
+  "potato":[
+  "  - alphabet",
+  "  - soup",
+  "  - cheese"
+    ]
+  "goats":{
+  "a":"alphabet",
+  "b":"soup",
+  "c":"cheese"
 }

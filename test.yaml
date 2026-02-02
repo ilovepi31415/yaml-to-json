@@ -2,4 +2,7 @@ potato:
   - alphabet
   - soup
   - cheese
-goats: fred
+goats:
+  a: alphabet
+  b: soup
+  c: cheese

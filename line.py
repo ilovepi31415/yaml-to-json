@@ -1,4 +1,5 @@
 SPACES_PER_TAB = 2
+BONUS_INDENTS = 1
 
 class Line():
     def __init__(self, text):
@@ -12,4 +13,4 @@ class Line():
         for c in self.text:
             if c == " ":
                 counter += 1
-        return counter // SPACES_PER_TAB
+        return (counter // SPACES_PER_TAB) + BONUS_INDENTS
