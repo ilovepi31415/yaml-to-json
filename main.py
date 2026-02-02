@@ -31,9 +31,12 @@ def main():
             # Add closing braces when the indent decreases
             while indent < current_indent:
                 if prevline.is_list_item:
-                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}]\n')
+                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}]')
                 else:
-                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}}}\n')
+                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}}}')
+                if indent == current_indent - 1:
+                    outfile.write(",")
+                outfile.write("\n")
                 current_indent -= 1
 
             # Add line to file
@@ -53,10 +56,18 @@ def main():
             # Check for commas
             if line.indent == nextline.indent and nextline.text:
                 message += ","
-
             message += "\n"
 
+            # Write line of text to outfile
             outfile.write(message)
+
+            # Add brace or bracket after final item
+            if not nextline.text and line.indent > 1:
+                if line.is_list_item:
+                    outfile.write("]\n")
+                else:
+                    outfile.write("}\n")
+
             current_indent = indent
         outfile.write("}")
         outfile.close()

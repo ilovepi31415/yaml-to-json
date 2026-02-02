@@ -7,6 +7,8 @@ class Line():
         self.is_list_item = self.text.strip().startswith("-")
         self.indents_next = self.text.endswith(":")
         self.indent = self.nesting()
+        # Parse text once flags are triggered
+        self.text = self.parse_text()
     
     def nesting(self):
         counter = 0
@@ -14,3 +16,6 @@ class Line():
             if c == " ":
                 counter += 1
         return (counter // SPACES_PER_TAB) + BONUS_INDENTS
+    
+    def parse_text(self):
+        return self.text.strip().strip("-").strip()
