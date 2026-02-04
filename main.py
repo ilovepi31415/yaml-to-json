@@ -8,7 +8,14 @@ def main():
         current_indent = 0
         outfile.write("{\n")
         for i in range(len(lines)):
-            line = Line(lines[i].strip("\n"))
+            line = lines[i].strip("\n")
+
+            # Catch special YAML format lines
+            if line in ["---", "..."]:
+                continue
+
+            # Convert current and surrounding lines into Line object
+            line = Line(line)
             if i + 1 < len(lines):
                 nextline = lines[i+1].strip("\n")
             else:
@@ -19,11 +26,11 @@ def main():
                 prevline = ""
             nextline = Line(nextline)
             prevline = Line(prevline)
-            print(line.text)
+            # print(line.text)
 
             # Categorize line
             indent = line.indent
-            print(indent, line.is_list_item, line.indents_next)
+            # print(indent, line.is_list_item, line.indents_next)
             
             if len(line.text.split(":")) > 1:
                 key, value = line.text.split(":")
@@ -60,7 +67,7 @@ def main():
             message += "\n"
 
             # Write line of text to outfile
-            print(message)
+            # print(message)
             outfile.write(message)
 
             # Add brace or bracket after final item
