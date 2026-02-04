@@ -11,5 +11,4 @@ When running `python3 main.py`, the program looks in its directory for a file na
 
 ### Limitations
 This is a continuing work in progress, so the following aspects of YAML are not yet supported:
-- **The starting line `---` and ending line `...`.** This will result in a program crash
 - **Objects within lists.** All list items must be a single value. Objects within lists will result in a program crash
