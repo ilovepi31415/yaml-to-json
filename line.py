@@ -11,6 +11,7 @@ class Line():
         self.text = self.parse_text()
     
     def nesting(self):
+        # Count total whitespace at the beginning of a line
         counter = 0
         for c in self.text:
             if c == " ":

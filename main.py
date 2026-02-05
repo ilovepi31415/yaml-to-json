@@ -26,16 +26,12 @@ def main():
                 prevline = ""
             nextline = Line(nextline)
             prevline = Line(prevline)
-            # print(line.text)
-
-            # Categorize line
-            indent = line.indent
-            # print(indent, line.is_list_item, line.indents_next)
             
             if len(line.text.split(":")) > 1:
                 key, value = line.text.split(":")
 
             # Add closing braces when the indent decreases
+            indent = line.indent
             while indent < current_indent:
                 if prevline.is_list_item:
                     outfile.write(f'{" " * current_indent * SPACES_PER_TAB}]')
@@ -48,8 +44,10 @@ def main():
 
             # Add line to file
             if value:
+                # Display "key":"value"
                 message = '  "' + key.strip() + '":"' + value.strip() + '"'
             else:
+                # Display "item"
                 message = '  "' + line.text.strip(":") + '"'
             value = None
 
@@ -67,7 +65,6 @@ def main():
             message += "\n"
 
             # Write line of text to outfile
-            # print(message)
             outfile.write(message)
 
             # Add brace or bracket after final item

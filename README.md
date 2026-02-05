@@ -9,6 +9,6 @@ This program was made in Python 3.14, and requires the Python interpreter to run
 ### Usage
 When running `python3 main.py`, the program looks in its directory for a file named `test.yaml`. After being converted to YAML, the resulting text will be stored in file `test.json`.
 
-### Limitations
+### Limitations / Future Goals
 This is a continuing work in progress, so the following aspects of YAML are not yet supported:
 - **Objects within lists.** All list items must be a single value. Objects within lists will result in a program crash
