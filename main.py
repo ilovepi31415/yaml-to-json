@@ -5,7 +5,8 @@ def main():
     with open("test.yaml", "r") as infile:
         outfile = open("test.json", "w")
         lines = infile.readlines()
-        current_indent = 0
+        current_indent = 1
+        indent_types = []
         outfile.write("{\n")
         for i in range(len(lines)):
             line = lines[i].strip("\n")
@@ -32,23 +33,24 @@ def main():
 
             # Add closing braces when the indent decreases
             indent = line.indent
+            current_indent = prevline.indent
             while indent < current_indent:
+                current_indent -= 1
                 if prevline.is_list_item:
                     outfile.write(f'{" " * current_indent * SPACES_PER_TAB}]')
                 else:
                     outfile.write(f'{" " * current_indent * SPACES_PER_TAB}}}')
-                if indent == current_indent - 1:
+                if indent == current_indent:
                     outfile.write(",")
                 outfile.write("\n")
-                current_indent -= 1
 
             # Add line to file
             if value:
                 # Display "key":"value"
-                message = '  "' + key.strip() + '":"' + value.strip() + '"'
+                message = f'{" " * line.indent * SPACES_PER_TAB}"' + key.strip() + '":"' + value.strip() + '"'
             else:
                 # Display "item"
-                message = '  "' + line.text.strip(":") + '"'
+                message = f'{" " * line.indent * SPACES_PER_TAB}"' + line.text.strip(":") + '"'
             value = None
 
             # Check for special line cases
@@ -68,13 +70,14 @@ def main():
             outfile.write(message)
 
             # Add brace or bracket after final item
+            print(line.indent, line.text, line.indents_next)
             if not nextline.text or nextline.text == "...":
                 while line.indent > 1:
-                    if line.is_list_item:
-                        outfile.write("]\n")
-                    else:
-                        outfile.write("}\n")
                     line.indent -= 1
+                    if line.is_list_item:
+                        outfile.write(f"{" " * line.indent * SPACES_PER_TAB}]\n")
+                    else:
+                        outfile.write(f"{" " * line.indent * SPACES_PER_TAB}}}\n")
 
             current_indent = indent
         outfile.write("}\n")

@@ -1,21 +1,21 @@
 {
   "grocery list":{
-  "tomato":"one",
-  "potato":{
-  "red":"three",
-  "brown":"four"
-      },
-  "cheese":[
-  "cheddar",
-  "provolone",
-  "swiss"
-      ]
-    ],
+    "tomato":"one",
+    "potato":{
+      "red":"three",
+      "brown":"four"
+    },
+    "cheese":[
+      "cheddar",
+      "provolone",
+      "swiss"
+    ]
+  ],
   "classes":[
-  "advanced linear",
-  "statistics",
-  "DSA",
-  "data analytics",
-  "diff eq"
-]
+    "advanced linear",
+    "statistics",
+    "DSA",
+    "data analytics",
+    "diff eq"
+  ]
 }
