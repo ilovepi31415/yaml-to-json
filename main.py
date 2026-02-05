@@ -68,11 +68,13 @@ def main():
             outfile.write(message)
 
             # Add brace or bracket after final item
-            if not nextline.text and line.indent > 1:
-                if line.is_list_item:
-                    outfile.write("]\n")
-                else:
-                    outfile.write("}\n")
+            if not nextline.text or nextline.text == "...":
+                while line.indent > 1:
+                    if line.is_list_item:
+                        outfile.write("]\n")
+                    else:
+                        outfile.write("}\n")
+                    line.indent -= 1
 
             current_indent = indent
         outfile.write("}\n")
