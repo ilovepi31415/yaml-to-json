@@ -36,10 +36,7 @@ def main():
             current_indent = prevline.indent
             while indent < current_indent:
                 current_indent -= 1
-                if prevline.is_list_item:
-                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}]')
-                else:
-                    outfile.write(f'{" " * current_indent * SPACES_PER_TAB}}}')
+                outfile.write(f'{" " * current_indent * SPACES_PER_TAB}{indent_types.pop()}')
                 if indent == current_indent:
                     outfile.write(",")
                 outfile.write("\n")
@@ -58,8 +55,10 @@ def main():
                 message += ":"
                 if nextline.is_list_item:
                     message += "["
+                    indent_types.append("]")
                 else:
                     message += "{"
+                    indent_types.append("}")
 
             # Check for commas
             if line.indent == nextline.indent and nextline.text:
@@ -74,10 +73,7 @@ def main():
             if not nextline.text or nextline.text == "...":
                 while line.indent > 1:
                     line.indent -= 1
-                    if line.is_list_item:
-                        outfile.write(f"{" " * line.indent * SPACES_PER_TAB}]\n")
-                    else:
-                        outfile.write(f"{" " * line.indent * SPACES_PER_TAB}}}\n")
+                    outfile.write(f"{" " * line.indent * SPACES_PER_TAB}{indent_types.pop()}\n")
 
             current_indent = indent
         outfile.write("}\n")
