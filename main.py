@@ -1,9 +1,31 @@
+import sys, os
+
 from line import Line
 SPACES_PER_TAB = 2
 
 def main():
-    with open("test.yaml", "r") as infile:
-        outfile = open("test.json", "w")
+    # Parse arguments for in- and outfile names
+    if len(sys.argv) < 2:
+        # Use defaults if none given
+        file_in = "test.yaml"
+        file_out = "test.json"
+    elif len(sys.argv) == 2:
+        # Get infile name and check for existence and filetype
+        file_in = sys.argv[1]
+        if not os.path.exists(file_in):
+            print("ERROR: infile does not exist")
+            sys.exit(1)
+        if not file_in.endswith(".yaml"):
+            print("ERROR: invalid file type")
+            sys.exit(2)
+        file_out = file_in.split('.')[0] + ".json"
+    else:
+        # Error otherwise
+        print("ERROR: too many arguments")
+        sys.exit(3)
+
+    with open(file_in, "r") as infile:
+        outfile = open(file_out, "w")
         lines = infile.readlines()
         current_indent = 1
         indent_types = []
@@ -69,7 +91,7 @@ def main():
             outfile.write(message)
 
             # Add brace or bracket after final item
-            print(line.indent, line.text, line.indents_next)
+            # print(line.indent, line.text, line.indents_next)
             if not nextline.text or nextline.text == "...":
                 while line.indent > 1:
                     line.indent -= 1

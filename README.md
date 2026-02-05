@@ -7,7 +7,9 @@ I really don't like JSON notation, and I never have. YAML is more convienient fo
 This program was made in Python 3.14, and requires the Python interpreter to run.
 
 ### Usage
-When running `python3 main.py`, the program looks in its directory for a file named `test.yaml`. After being converted to YAML, the resulting text will be stored in file `test.json`.
+python3 main.py [infile-name]
+
+When running `python3 main.py`, the program looks in its directory for a file matching the name selected by the user. If no file is given, it will look for `test.yaml` instead. After being converted to YAML, the resulting text will be stored in a json file with the same file name as the input.
 
 ### Limitations / Future Goals
 This is a continuing work in progress, so the following aspects of YAML are not yet supported:
